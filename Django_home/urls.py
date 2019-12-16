@@ -15,9 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import re_path
 from firstApp import views
 
 urlpatterns = [
-    path('', views.index, name='home'),
+    re_path(r'^products/$', views.products),
+    path('products/<int:productid>/', views.products),
+
+    path('users/', views.users),
+    re_path(r'^users/<int:user_id>/<str:name>/', views.users),
+
+    re_path(r'^about/contact/', views.contact),
+    re_path(r'^about', views.about),
+
     path('admin/', admin.site.urls),
+    path('', views.index, name='home'),
 ]
